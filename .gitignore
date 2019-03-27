@@ -1,3 +1,5 @@
 .venv/
 .envrc
 settings.json
+__pycache__/
+data/
