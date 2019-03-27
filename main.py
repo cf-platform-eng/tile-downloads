@@ -21,7 +21,7 @@ import json
 
 def load_data(slug):
     filename = os.path.join('data', slug + '.csv')
-    with open(filename) as report:
+    with open(filename, encoding='utf-8-sig') as report:
         reader = csv.reader(report)
         header = next(reader)
         header = [label.strip().lower().replace(' ', '_') for label in header]
