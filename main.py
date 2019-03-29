@@ -16,6 +16,7 @@ import os
 import csv
 import click
 import json
+import datetime
 
 # Library methods for use in other software
 
@@ -28,6 +29,29 @@ def load_data(slug):
         downloads = [dict(zip(header, download), tile_slug=slug) for download in reader]
         return downloads
 
+# methods for counting the number of users
+
+def load_data_customer(slug):
+    downloads = load_data(slug)
+    count_num = 0
+    customers = {}
+    for download in downloads:
+        organization = download['organization']
+        if organization not in customers:
+            customers[organization] = {
+                'first_download': download['updated_at']
+                'last_download': download['updated_at']
+            }
+        else:
+            customers[organization]{'first_download'}
+
+
+        # if not download['email'].endswith("pivotal.io"):
+        #     customers.append(download['email'])
+
+        return customers
+
+
 # Command Line Interface implementation (using click module for parsing)
 
 @click.group()
@@ -39,6 +63,14 @@ def cli():
 def dump(slug):
     downloads = load_data(slug)
     print(json.dumps(downloads, indent = 4))
+
+@cli.command('list')
+@click.argument('slug')
+def customerlist(slug):
+    clist = load_data_customer(slug)
+    clist.sort()
+    print(json.dumps(clist, indent = 4))
+
 
 if __name__ == '__main__':
     cli()
