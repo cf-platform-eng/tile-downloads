@@ -1,3 +1,5 @@
+# tile-downloads is no longer actively maintained by VMware.
+
 # tile-downloads
 Sharp little tool to extract meaning from the download CSV
 
